@@ -1,7 +1,8 @@
 package dataStructures;
 
 public class Fibonacci {
-
+	
+	//calculates first n fibonacci numbers
 	public static int fibonacci (int n) {
 		if (n == 0) {
 			return 0;
