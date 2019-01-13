@@ -2,6 +2,7 @@ package dataStructures;
 
 public class Sudoku {
 
+	//solves sudoku puzzle by inputting values and backtracking when no more valid inputs
 	public static boolean solve(int [][] board){
 		for (int row=0; row<board.length; row++) {
 			for (int col=0; col<board.length; col++) {
@@ -22,7 +23,7 @@ public class Sudoku {
 		}
 	return true;
 		}
-	
+	//determines if a number is valid based on row/column rule of sodoku
 	public static boolean valid(int board[][], int row, int col, int number) {
 		for(int i = 0; i<board.length ; i++) {
 			if(board[row][i] == number) {
