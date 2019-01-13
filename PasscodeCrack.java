@@ -18,6 +18,7 @@ public class PasscodeCrack {
 
 	public static void main(String[] args) {
 
+		//input passcode attempts from file and create map of attempts
 		String fileName = "keylog.txt";
 		Graph<Integer, String> g = new DirectedSparseGraph<>();
 		
@@ -45,7 +46,8 @@ public class PasscodeCrack {
 		}
 		System.out.println(g);
 		
-		
+		//finds possible beginnings based on
+		//a beginning number will have no directed edges pointing towards it 
 		Set<String> possbeg = new HashSet<String>();
 		for(int i=0; i<=9; i++) {
 			if(g.containsVertex(i)) {
@@ -56,11 +58,13 @@ public class PasscodeCrack {
 			}
 		
 		}
+		//creates possible key using possible beginning
 		ArrayList<Integer> temp = new ArrayList<Integer>();
 		for(String beg:possbeg) {
 			System.out.println(beg);
 			temp = createKey(g, Integer.valueOf(beg));
 		}
+		//performs swap based on directed edges of graph
 		Collection<String> edges = g.getEdges();
 		int numswaps = 0;
 		for(String edge:edges)	{
@@ -71,6 +75,8 @@ public class PasscodeCrack {
 			}
 				
 			}
+		//continues swapping until key matches graph directed logic and no more swaps
+		//are performed
 		while(numswaps>0) {
 			numswaps = 0;
 		for(String edge:edges)	{
@@ -84,7 +90,7 @@ public class PasscodeCrack {
 		}
 			System.out.println(temp);
 		}
-	
+	//creates potential key using depth first search
 	public static ArrayList<Integer> createKey(Graph<Integer, String> g, int vertex) {
 		Queue<Integer> searchqueue = new LinkedList<Integer>();
 		ArrayList<Integer> visited = new ArrayList<Integer>(g.getVertexCount());
@@ -114,7 +120,7 @@ public class PasscodeCrack {
 		}
 		
 	
-	
+	//returns true if value was visited, false if not
 	public static boolean wasVisited(int val, ArrayList<Integer> visited) {
 		for(int i = 0; i<visited.size(); i++) {
 			if (visited.get(i) == val) {
